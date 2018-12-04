@@ -24,6 +24,9 @@ import com.guitar.db.repository.ModelRepository;
 public class ModelPersistenceTests {
 	@Autowired
 	private ModelRepository modelRepository;
+	
+	@Autowired
+	private ModelRepository modelJpaRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -53,8 +56,7 @@ public class ModelPersistenceTests {
 
 	@Test
 	public void testGetModelsInPriceRange() throws Exception {
-		List<Model> mods = modelRepository.getModelsInPriceRange(BigDecimal.valueOf(1000L), BigDecimal.valueOf(2000L));
-		assertEquals(4, mods.size());
+		modelJpaRepository.getModelsInPriceRange(BigDecimal.valueOf(1000L), BigDecimal.valueOf(2000L));
 	}
 
 	@Test
