@@ -2,6 +2,7 @@ package com.guitar.db;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 
 import java.util.List;
 
@@ -36,6 +37,30 @@ public class LocationPersistenceTests {
 	    List<Location> locations = locationJpaRepository.findAll();
 	    assertNotNull(locations);
 	}
+	
+	@Test
+	public void testJpaAnd() {
+	    List<Location> locations = locationJpaRepository.findByStateAndCountry("Utah", "United States");
+	    Location aLocation = locations.get(0);
+	    String aState = aLocation.getState();
+	    assertEquals("Utah", aState);
+	}
+	
+	@Test
+	public void testJpaOr() {
+	    List<Location> locations = locationJpaRepository.findByStateOrCountry("Utah", "NOTHING");
+	    Location aLocation = locations.get(0);
+	    String aState = aLocation.getState();
+	    assertEquals("Utah", aState);
+	}
+	
+	@Test
+	public void testJpaNot() {
+	    List<Location> locations = locationJpaRepository.findByStateNot("Utah");
+	    Location aLocation = locations.get(0);
+	    String aState = aLocation.getState();
+	    assertNotSame("Utah", aState);
+	}
 
 	@Test
 	@Transactional
@@ -61,6 +86,12 @@ public class LocationPersistenceTests {
 	public void testFindWithLike() throws Exception {
 		List<Location> locs = locationJpaRepository.findByStateLike("%New%");
 		assertEquals(4, locs.size());
+	}
+	
+	@Test
+	public void testFindWithNotLike() throws Exception {
+	    List<Location> locs = locationJpaRepository.findByStateNotLike("%New%");
+	    assertEquals(46, locs.size());
 	}
 
 	@Test
