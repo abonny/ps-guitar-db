@@ -89,6 +89,15 @@ public class LocationPersistenceTests {
 	}
 	
 	@Test
+	public void testFindFirstWithLikeOrderByAsc() throws Exception {
+	    Location loc = locationJpaRepository.findFirstByStateNotLikeOrderByStateAsc("N%");
+	    assertEquals("Alabama", loc.getState());
+	    
+	    loc = locationJpaRepository.findFirstByStateNotLikeOrderByStateAsc("A%");
+        assertEquals("California", loc.getState());
+	}
+	
+	@Test
 	public void testFindWithNotLike() throws Exception {
 	    List<Location> locs = locationJpaRepository.findByStateNotLike("%New%");
 	    assertEquals(46, locs.size());

@@ -22,5 +22,6 @@ public interface LocationJpaRepository extends JpaRepository<Location, Long> {
     
     //Order By Should go Last
     List<Location> findByStateNotLikeOrderByStateAsc(String stateName);
+    Location findFirstByStateNotLikeOrderByStateAsc(String stateName);
 
 }
