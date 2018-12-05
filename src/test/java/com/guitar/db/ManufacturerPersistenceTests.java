@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.guitar.db.model.Manufacturer;
+import com.guitar.db.repository.ManufacturerJpaRepository;
 import com.guitar.db.repository.ManufacturerRepository;
 
 @ContextConfiguration(locations={"classpath:com/guitar/db/applicationTests-context.xml"})
@@ -19,6 +20,9 @@ import com.guitar.db.repository.ManufacturerRepository;
 public class ManufacturerPersistenceTests {
 	@Autowired
 	private ManufacturerRepository manufacturerRepository;
+    
+	@Autowired
+    private ManufacturerJpaRepository manufacturerJpaRepository;
 
 	@Test
 	public void testGetManufacturersFoundedBeforeDate() throws Exception {
@@ -37,4 +41,22 @@ public class ManufacturerPersistenceTests {
 		List<Manufacturer> mans = manufacturerRepository.getManufacturersThatSellModelsOfType("Semi-Hollow Body Electric");
 		assertEquals(1, mans.size());
 	}
+	
+	@Test
+	public void testActiveTrue() throws Exception {
+	    List<Manufacturer> activeManufacturers = manufacturerJpaRepository.findByActiveTrue();
+	    Manufacturer aManufacturer = activeManufacturers.get(0);
+	    String fender = aManufacturer.getName();
+	    assertEquals("Fender Musical Instruments Corporation", fender);
+	}
+	
+    @Test
+    public void testInactive() throws Exception {
+        List<Manufacturer> inActiveManufacturers = manufacturerJpaRepository.findByActiveFalse();
+        Manufacturer aManufacturer = inActiveManufacturers.get(0);
+        String gibson = aManufacturer.getName();
+        assertEquals("Gibson Guitar Corporation", gibson);
+    }
+	
+	
 }
