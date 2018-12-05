@@ -19,5 +19,8 @@ public interface LocationJpaRepository extends JpaRepository<Location, Long> {
     List<Location> findByStateAndCountry(String stateName, String countryName);
     
     List<Location> findByStateStartingWithIgnoreCase(String stateName);
+    
+    //Order By Should go Last
+    List<Location> findByStateNotLikeOrderByStateAsc(String stateName);
 
 }
