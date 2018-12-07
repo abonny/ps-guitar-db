@@ -4,9 +4,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.guitar.db.model.Model;
-import com.guitar.db.model.ModelType;
 
 public interface ModelJpaRepository extends JpaRepository<Model, Long> {
     
@@ -23,4 +24,14 @@ public interface ModelJpaRepository extends JpaRepository<Model, Long> {
      */
     List<Model> findByModelTypeNameIn(List<String> types);
     
+    /**
+     * Notice the JPQL we have ":named" parameters instead of "?".
+     * 
+     * @return
+     */
+    @Query("select m from Model m where m.price >= :lowest and m.price <= :highest and m.woodType like :wood")
+    List<Model> queryByPriceRangeAndWoodType(@Param("lowest") BigDecimal low, 
+            @Param("highest") BigDecimal high, 
+            @Param("wood") String would);
+
 }

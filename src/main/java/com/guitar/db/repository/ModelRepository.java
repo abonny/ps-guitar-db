@@ -66,12 +66,13 @@ public class ModelRepository {
 	 * Custom finder
 	 */
 	public List<Model> getModelsByPriceRangeAndWoodType(BigDecimal lowest, BigDecimal highest, String wood) {
-		@SuppressWarnings("unchecked")
-		List<Model> mods = entityManager
-				.createQuery("select m from Model m where m.price >= :lowest and m.price <= :highest and m.woodType like :wood")
-				.setParameter("lowest", lowest)
-				.setParameter("highest", highest)
-				.setParameter("wood", "%" + wood + "%").getResultList();
+		
+	    
+	    List<Model> mods = 
+		
+		modelJpaRepository.queryByPriceRangeAndWoodType(lowest, highest, "%"+wood+"%");
+		
+		
 		return mods;
 	}
 
