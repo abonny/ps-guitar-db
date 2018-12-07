@@ -39,5 +39,14 @@ public interface ModelJpaRepository extends JpaRepository<Model, Long> {
     List<Model> queryByPriceRangeAndWoodTypeSet(@Param("lowest") BigDecimal low, 
             @Param("highest") BigDecimal high, 
             @Param("wood") Set<String> woodSet);
+    
+    
+    /**
+     * This is auto-bound to the "named query" in {@link Model} because of naming conventions.
+     * 
+     * @param modelType
+     * @return
+     */
+    List<Model> findAllModelsByType(@Param("name") String modelType);
 
 }
