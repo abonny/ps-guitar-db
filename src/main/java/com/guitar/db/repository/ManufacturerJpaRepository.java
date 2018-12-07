@@ -14,5 +14,14 @@ public interface ManufacturerJpaRepository extends JpaRepository<Manufacturer, L
     List<Manufacturer> findByActiveTrue();
     
     List<Manufacturer> findByActiveFalse();
+    
+    /**
+     * STS isn't advanced enough to know this is a valid named query mapping.
+     * It is not part of Query DSL...
+     * 
+     * @param modelTypeAnything
+     * @return
+     */
+    List<Manufacturer> getAllThatSellAcoustics(String modelTypeAnything);
 
 }

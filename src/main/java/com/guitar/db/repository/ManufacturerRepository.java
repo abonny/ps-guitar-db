@@ -74,4 +74,9 @@ public class ManufacturerRepository {
 				.setParameter(1, modelType).getResultList();
 		return mans;
 	}
+	
+    public List<Manufacturer> getManufacturersThatSellModelsOfTypeJpaVersion(String modelType) {
+        List<Manufacturer> mans = manufacturerJpaRepository.getAllThatSellAcoustics(modelType);
+        return mans;
+    }
 }
