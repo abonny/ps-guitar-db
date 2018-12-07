@@ -6,7 +6,9 @@ import static org.junit.Assert.assertTrue;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -67,6 +69,20 @@ public class ModelPersistenceTests {
 		List<Model> mods = modelRepository.getModelsByPriceRangeAndWoodType(BigDecimal.valueOf(1000L), BigDecimal.valueOf(2000L), "Maple");
 		assertEquals(3, mods.size());
 	}
+	
+    @Test
+    public void testGetModelsByPriceRangeAndWoodTypeSet() throws Exception {
+        
+        Set<String> woodTypeSet = new HashSet<>();
+        woodTypeSet.add("Maple, Alder, Ash, Popular");
+        woodTypeSet.add("Maple, Alder, Ash, Pine");
+        woodTypeSet.add("Mahogany and Maple");
+        woodTypeSet.add("Mahogany, Birch and Maple");
+        woodTypeSet.add("Maple and Rosewood");
+        
+        List<Model> mods = modelJpaRepository.queryByPriceRangeAndWoodTypeSet(BigDecimal.valueOf(1000L), BigDecimal.valueOf(2000L), woodTypeSet);
+        assertEquals(3, mods.size());
+    }
 
 	@Test
 	public void testGetModelsByType() throws Exception {

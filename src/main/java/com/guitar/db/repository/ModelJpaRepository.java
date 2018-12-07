@@ -2,6 +2,7 @@ package com.guitar.db.repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,5 +34,10 @@ public interface ModelJpaRepository extends JpaRepository<Model, Long> {
     List<Model> queryByPriceRangeAndWoodType(@Param("lowest") BigDecimal low, 
             @Param("highest") BigDecimal high, 
             @Param("wood") String would);
+    
+    @Query("select m from Model m where m.price >= :lowest and m.price <= :highest and m.woodType in :wood")
+    List<Model> queryByPriceRangeAndWoodTypeSet(@Param("lowest") BigDecimal low, 
+            @Param("highest") BigDecimal high, 
+            @Param("wood") Set<String> woodSet);
 
 }
