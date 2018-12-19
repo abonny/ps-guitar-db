@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,9 +33,10 @@ public interface ModelJpaRepository extends JpaRepository<Model, Long> {
      * @return
      */
     @Query("select m from Model m where m.price >= :lowest and m.price <= :highest and m.woodType like :wood")
-    List<Model> queryByPriceRangeAndWoodType(@Param("lowest") BigDecimal low, 
+    Page<Model> queryByPriceRangeAndWoodType(@Param("lowest") BigDecimal low, 
             @Param("highest") BigDecimal high, 
-            @Param("wood") String would);
+            @Param("wood") String would,
+            Pageable page);
     
     @Query("select m from Model m where m.price >= :lowest and m.price <= :highest and m.woodType in :wood")
     List<Model> queryByPriceRangeAndWoodTypeSet(@Param("lowest") BigDecimal low, 
