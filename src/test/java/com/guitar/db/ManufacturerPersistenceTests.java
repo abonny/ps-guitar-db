@@ -41,11 +41,11 @@ public class ManufacturerPersistenceTests {
 		List<Manufacturer> mans = manufacturerRepository.getManufacturersThatSellModelsOfType("Semi-Hollow Body Electric");
 		assertEquals(1, mans.size());
 	}
-    @Test
-    public void testGetManufacturersThatSellModelsOfTypeJpaVersion() throws Exception {
-        List<Manufacturer> mans = manufacturerRepository.getManufacturersThatSellModelsOfTypeJpaVersion("Semi-Hollow Body Electric");
-        assertEquals(1, mans.size());
-    }
+//    @Test
+//    public void testGetManufacturersThatSellModelsOfTypeJpaVersion() throws Exception {
+//        List<Manufacturer> mans = manufacturerRepository.getManufacturersThatSellModelsOfTypeJpaVersion("Semi-Hollow Body Electric");
+//        assertEquals(1, mans.size());
+//    }
 	
 	@Test
 	public void testActiveTrue() throws Exception {

@@ -22,6 +22,6 @@ public interface ManufacturerJpaRepository extends JpaRepository<Manufacturer, L
      * @param modelTypeAnything
      * @return
      */
-    List<Manufacturer> getAllThatSellAcoustics(String modelTypeAnything);
+    //List<Manufacturer> getAllThatSellAcoustics(String modelTypeAnything);
 
 }

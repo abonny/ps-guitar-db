@@ -75,8 +75,8 @@ public class ManufacturerRepository {
 		return mans;
 	}
 	
-    public List<Manufacturer> getManufacturersThatSellModelsOfTypeJpaVersion(String modelType) {
-        List<Manufacturer> mans = manufacturerJpaRepository.getAllThatSellAcoustics(modelType);
-        return mans;
-    }
+//    public List<Manufacturer> getManufacturersThatSellModelsOfTypeJpaVersion(String modelType) {
+//        List<Manufacturer> mans = manufacturerJpaRepository.getAllThatSellAcoustics(modelType);
+//        return mans;
+//    }
 }
